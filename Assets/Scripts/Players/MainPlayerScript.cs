@@ -8,6 +8,7 @@ public class MainPlayerScript : MonoBehaviour
 {
     [Header("Character Details")]
     public string characterName;
+    public float characterHealth;
     public float characterMoveSpeed;
     [HideInInspector] public float currentMoveSpeed;
     public Animator characterAnim;
@@ -57,20 +58,25 @@ public class MainPlayerScript : MonoBehaviour
         if (StatesManager.instance.currentGameStates == StatesManager.GameStatesList.PLAYING)
         {
             Movements();
-            if (!isSkillOnCooldown)
+            SkillControlling();
+        }
+    }
+
+    public virtual void SkillControlling()
+    {
+        if (!isSkillOnCooldown)
+        {
+            if (Input.GetKeyDown(KeyCode.J))
             {
-                if (Input.GetKeyDown(KeyCode.J))
-                {
-                    UsingSkillSlot0();
-                }
-                if (Input.GetKeyDown(KeyCode.K))
-                {
-                    UsingSkillSlot1();
-                }
-                if (Input.GetKeyDown(KeyCode.L))
-                {
-                    UsingSkillSlot2();
-                }
+                UsingSkillSlot0();
+            }
+            if (Input.GetKeyDown(KeyCode.K))
+            {
+                UsingSkillSlot1();
+            }
+            if (Input.GetKeyDown(KeyCode.L))
+            {
+                UsingSkillSlot2();
             }
         }
     }
@@ -117,6 +123,7 @@ public class MainPlayerScript : MonoBehaviour
     {
         if (collision.gameObject.tag == "EnemyAttack")
         {
+            characterHealth--;
             DamageTrigger();
         }
     }
@@ -124,5 +131,10 @@ public class MainPlayerScript : MonoBehaviour
     void DamageTrigger()
     {
         characterAnim.SetTrigger("GotHit");
+    }
+
+    void DeathTrigger()
+    {
+        characterAnim.SetTrigger("Death");
     }
 }
