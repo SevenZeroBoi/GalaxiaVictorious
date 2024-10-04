@@ -60,6 +60,8 @@ public class MainPlayerScript : MonoBehaviour
             Movements();
             SkillControlling();
         }
+
+        CooldownChecking();
     }
 
     public virtual void SkillControlling()
@@ -69,6 +71,7 @@ public class MainPlayerScript : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.J))
             {
                 UsingSkillSlot0();
+                Debug.Log("skillcheck1");
             }
             if (Input.GetKeyDown(KeyCode.K))
             {

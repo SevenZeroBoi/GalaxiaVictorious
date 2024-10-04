@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 [CreateAssetMenu(fileName = "NewBullets", menuName = "ScriptableObjects/Bullets", order = 0)]
-public class SO_PlayerBullets : MonoBehaviour
+public class SO_PlayerBullets : ScriptableObject
 {
     public string bulletName;
     public GameObject bulletObject;
